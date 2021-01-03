@@ -1,6 +1,10 @@
 import path from "path";
 import webpack from "webpack";
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const isProduction = false;
+const isDevelopment = !isProduction;
 
 const config: webpack.Configuration = {
   entry: "./src/index.tsx",
@@ -20,6 +24,13 @@ const config: webpack.Configuration = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader"
+        ]
+      }
     ],
   },
   resolve: {
@@ -41,8 +52,11 @@ const config: webpack.Configuration = {
         files: "./src/**/*",
       },
     }),
+    new MiniCssExtractPlugin({
+      filename: "assets/css/[name].[contenthash:8].css",
+      chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
+    })
   ],
-
 };
 
 export default config;
