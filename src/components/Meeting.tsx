@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 
 
-class Meeting extends Component {
-    constructor(props) {
+class Meeting extends React.Component<any, any> {
+    constructor(props: any) {
         super(props);
-        let d = new Date();
+        const d : Date = new Date();
 
         this.state = {
             DisplayName: "Fill In Event Name",
@@ -20,8 +20,8 @@ class Meeting extends Component {
         this.changeDetails = this.changeDetails.bind(this);
     }
 
-    changeDetails(e) {
-        switch (e.target.id) {
+    changeDetails(e: React.ChangeEvent<HTMLInputElement>) {
+        switch (e.target.name) {
             case '_year-start':
                 this.setState({ Year: e.target.value });
                 break;
@@ -138,6 +138,6 @@ class Meeting extends Component {
             </div>
         );
     }
-};
+}
 
 export default Meeting;
