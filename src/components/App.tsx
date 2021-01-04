@@ -3,6 +3,7 @@ import * as React from 'react';
 import './App.css'; 
 
 import Meeting from './Meeting';
+import Clock from './Clock';
 
 class App extends React.Component {
 
@@ -10,7 +11,7 @@ class App extends React.Component {
         return (
             <div className="app">
                 Hello.
-                <Meeting />
+                <Clock />
                 <Meeting />
             </div>
         )

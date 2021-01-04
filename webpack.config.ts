@@ -27,7 +27,7 @@ const config: webpack.Configuration = {
       {
         test: /\.css$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "style-loader",
           "css-loader"
         ]
       }
