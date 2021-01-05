@@ -1,20 +1,25 @@
 import * as React from 'react';
+import ChangeDetails from '../actionCreator';
+import store from '../store';
+import {connect} from 'react-redux';
 
 class Meeting extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
-        const d : Date = new Date();
 
-        this.state = {
-            DisplayName: "Fill In Event Name",
-            Year: d.getFullYear(),
-            Month: d.getMonth() + 1,
-            Date: d.getDate(),
-            Hour: d.getHours(),
-            Minute: d.getMinutes(),
-            EventDate: new Date(),
-            EventAllDay: false
-        };
+        this.state = store.getState();
+    //        const d : Date = new Date();
+
+        // this.state = {
+        //     DisplayName: "Fill In Event Name",
+        //     Year: d.getFullYear(),
+        //     Month: d.getMonth() + 1,
+        //     Date: d.getDate(),
+        //     Hour: d.getHours(),
+        //     Minute: d.getMinutes(),
+        //     EventDate: new Date(),
+        //     EventAllDay: false
+        // };
 
         this.changeDetails = this.changeDetails.bind(this);
     }
@@ -22,7 +27,8 @@ class Meeting extends React.Component<any, any> {
     changeDetails(e: React.ChangeEvent<HTMLInputElement>) {
         switch (e.target.name) {
             case '_year-start':
-                this.setState({ Year: e.target.value });
+                store.dispatch(ChangeDetails("YEAR", e.target.value))
+                //this.setState({ Year: e.target.value });
                 break;
             case '_month-start':
                 this.setState({ Month: e.target.value });
@@ -139,4 +145,10 @@ class Meeting extends React.Component<any, any> {
     }
 }
 
-export default Meeting;
+//TODO add type
+const mapStateToProps = (state:any) => ({
+    Year: state.Year
+});
+
+
+export default connect(mapStateToProps)( Meeting );

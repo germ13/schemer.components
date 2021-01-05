@@ -1,6 +1,6 @@
 import * as action from './actionTypes';
 
-export function ChangeDetails(property, value) {
+export const ChangeDetails = (property: string, value: any) => {
     let type = "";
     switch (property) {
         case "YEAR":
